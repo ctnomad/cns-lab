@@ -2,23 +2,18 @@
 def generateTheKey(key):
 	key=key.replace(" ", "")
 	key=key.upper()
+	key=key.replace("J", "I")
 	result=list()
 	for c in key: #storing key
 		if c not in result:
-			if c=='J': ## Playfair rule, to maintain 5x5 matrix
-				result.append('I')
-			else:
-				result.append(c)
-	flag=0
+			result.append(c)
 	for i in range(65,91): #storing other character
 		if chr(i) not in result:
-			if i==73 and chr(74) not in result:
-				result.append("I")
-				flag=1
-			elif flag==0 and i==73 or i==74:
+			if i==74:
 				pass    
 			else:
 				result.append(chr(i))
+    
 	k=0 # pointer for result list
 	key_matrix=matrix(5,5,0) #initialize matrix
 	for i in range(0,5): #making matrix
@@ -72,4 +67,5 @@ def encrypt():  #Encryption
         
 key=input("Enter key")
 k_matrix = generateTheKey(key)        
+print(k_matrix)
 encrypt()
